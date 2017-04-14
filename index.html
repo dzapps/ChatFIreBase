@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="utf-8">
+	<title>Actosoft</title>
+</head>
+<body>
+	<div>
+		<ul id="chat"></ul>
+	</div>
+	<input type="text" id="mensaje">
+	<button id="botoncito">Puchamesta</button>
+
+	<script src="jquery.js"></script>
+
+	<script src="https://www.gstatic.com/firebasejs/3.7.6/firebase.js"></script>
+	<script>
+	  // Initialize Firebase
+	  var config = {
+	    apiKey: "AIzaSyAbLLVf3OfSb6OEujpoqmwDrCeaLmP8ttY",
+	    authDomain: "actosoft-650ab.firebaseapp.com",
+	    databaseURL: "https://actosoft-650ab.firebaseio.com",
+	    projectId: "actosoft-650ab",
+	    storageBucket: "actosoft-650ab.appspot.com",
+	    messagingSenderId: "343524351113"
+	  };
+	  firebase.initializeApp(config);
+	</script>
+
+	<script>
+
+	var db = firebase.database();
+		$(document).ready(function(){
+			db.ref('mensajes').on('child_added', function(data){
+				//console.log(data.val().mensaje);
+				$('#chat').append('<li>'+data.val().mensaje+'</li>');
+			});
+
+		});
+		$('#botoncito').on('click', function(){
+			//console.log("Funciona");
+			var mensaje = $('#mensaje').val();
+			db.ref('mensajes').push({
+				mensaje: mensaje
+			});
+			$('#mensaje').val('');
+		});
+	</script>
+
+</body>
+</html>
