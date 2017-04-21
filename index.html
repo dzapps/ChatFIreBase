@@ -8,27 +8,51 @@
 	  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css">
 
 	  <style type="text/css">
-	  	.s6 {
-	  		position: relative;
-	  	}
-	  	.btn {
-	  		top: 100px;
+	  	.titulo {
+	  		background-color: #EEEEEE;
+	  		position: fixed;
+	  		color: black;
+	  		font-size: 16px;
+	  			  	}
+
+	  	.scroll {
+    background-color: #E5DDD5;
+    height: 90vh;
+    overflow: scroll;
+    padding-bottom: 200px;
+}
+
+	  	.envio {
+
+	  			position: absolute;
+				bottom: 0;
+				background-color: #F5F1EE;
+
 	  	}
 	  </style>
 
 </head>
 <body>
 	<div class="row">
-		<div class="col s6" style="background-color: #42c2f4;">
-		<ul id="chat"></ul>
+		<div class="col s12 titulo">
+			<p>Mi chat con firebase</p>
 		</div>
-		<div class="col s6" style="background-color: blue">
-	<input type="text" id="mensaje">
-	<button class="waves-effect waves-light btn" id="botoncito">Enviar</button>
-	</div>	
 	</div>
-	
+	<div class="row">
+		<div class="col s10 offset-s1 scroll">
+			<br>
+			<ul id="chat"></ul>
+			<br>
+			<br>
+		</div>
+	</div>
 
+	<div class="row">
+		<div class="col s12 envio">
+			<input type="text" id="mensaje">
+			<button" class="btn waves-effect waves-light" id="botoncito">Enviar</button>
+		</div>
+	</div>	
 	<script src="jquery.js"></script>
 
 	  <!-- Compiled and minified JavaScript -->
@@ -54,7 +78,7 @@
 		$(document).ready(function(){
 			db.ref('mensajes').on('child_added', function(data){
 				//console.log(data.val().mensaje);
-				$('#chat').append('<p class="chip">'+data.val().mensaje+'</p><br>');
+				$('#chat').append('<p class="chip" style="background-color: #DCF8C6;">'+data.val().mensaje+'</p><br>');
 			});
 
 
